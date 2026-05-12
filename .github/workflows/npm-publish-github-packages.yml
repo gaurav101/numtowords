@@ -7,6 +7,11 @@ on:
   release:
     types: [created]
   workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are you running this?'
+        required: false
+        default: 'Manual trigger'
 
 jobs:
   build:
