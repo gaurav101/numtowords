@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Supported locale identifiers */
-export type Locale = "en" | "in" | "hi" | "de" | "fr" | (string & {});
+export type Locale = 'en' | 'in' | 'hi' | 'de' | 'fr' | (string & {});
 
 /** Options passed to convert() */
 export interface ConvertOptions {

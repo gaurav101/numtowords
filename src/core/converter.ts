@@ -1,4 +1,4 @@
-import { ConvertOptions, Locale, LocaleDefinition } from "./types";
+import { ConvertOptions, Locale, LocaleDefinition } from './types';
 
 // Registry of all registered locales
 const registry = new Map<Locale, LocaleDefinition>();
@@ -19,7 +19,7 @@ export function getLocale(id: Locale): LocaleDefinition {
   if (!def) {
     throw new Error(
       `[numtowords] Locale "${id}" is not registered. ` +
-        `Available: ${[...registry.keys()].join(", ")}`
+        `Available: ${[...registry.keys()].join(', ')}`,
     );
   }
   return def;
@@ -33,10 +33,10 @@ export function availableLocales(): Locale[] {
 // ─── Defaults ────────────────────────────────────────────────────────────────
 
 const DEFAULT_OPTIONS: Required<ConvertOptions> = {
-  locale: "en",
+  locale: 'en',
   capitalize: true,
   useAnd: true,
-  currency: "",
+  currency: '',
 };
 
 // ─── Main convert function ────────────────────────────────────────────────────
@@ -51,7 +51,7 @@ const DEFAULT_OPTIONS: Required<ConvertOptions> = {
  */
 export function convert(
   input: number | bigint | string,
-  options?: ConvertOptions
+  options?: ConvertOptions,
 ): string {
   const opts: Required<ConvertOptions> = { ...DEFAULT_OPTIONS, ...options };
 
@@ -59,20 +59,20 @@ export function convert(
   let raw = String(input).trim();
   let negative = false;
 
-  if (raw.startsWith("-")) {
+  if (raw.startsWith('-')) {
     negative = true;
     raw = raw.slice(1);
   }
 
   // Strip commas / underscores used as separators
-  raw = raw.replace(/[,_\s]/g, "");
+  raw = raw.replace(/[,_\s]/g, '');
 
   if (!/^\d+$/.test(raw)) {
     throw new Error(`[numtowords] Invalid numeric input: "${input}"`);
   }
 
   // Remove leading zeros
-  raw = raw.replace(/^0+/, "") || "0";
+  raw = raw.replace(/^0+/, '') || '0';
 
   const n = BigInt(raw);
 
@@ -80,12 +80,12 @@ export function convert(
   const locale = getLocale(opts.locale);
   let result = locale.convert(n, opts);
 
-  if (negative) result = "Negative " + result;
+  if (negative) result = 'Negative ' + result;
 
   // ── Capitalise ─────────────────────────────────────────────────────────────
   if (opts.capitalize) {
     // Do not capitalise German zero (tests expect lowercase 'null')
-    if (!(n === 0n && opts.locale === "de")) {
+    if (!(n === 0n && opts.locale === 'de')) {
       result = result.charAt(0).toUpperCase() + result.slice(1);
     }
   }

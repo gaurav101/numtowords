@@ -1,11 +1,19 @@
 {
   "name": "@gks101/numtowords",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Convert numbers to words in multiple languages and numeral systems (English, Indian, etc.)",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
   "types": "dist/types/index.d.ts",
+  "homepage": "https://gaurav101.github.io/numtowords/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaurav101/numtowords.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gaurav101/numtowords/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.esm.js",
@@ -18,19 +26,29 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.mjs && tsc --target ES2020 --module ES2020 --downlevelIteration --skipLibCheck --noEmitOnError false --outDir dist/locales --rootDir src src/locales/*.ts",
+    "build": "rm -rf dist && rollup -c rollup.config.mjs && tsc --target ES2020 --module ES2020 --downlevelIteration --skipLibCheck --noEmitOnError false --outDir dist --rootDir src src/locales/*.ts",
     "test": "jest",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "prepack": "npm run build",
+    "prepare": "npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [
     "number-to-words",
     "multilingual",
     "indian-numbering",
-    "english",
-    "hindi",
+    "english-numbering",
+    "hindi-numbering",
     "number-converter",
     "number-to-word-converter",
-    "i18n"
+    "i18n",
+    "numtowords",
+    "number-converter",
+    "amount-to-words",
+    "numbers-to-text",
+    "currency-formatter",
+    "intl-number-format"
   ],
   "author": "",
   "license": "MIT",
@@ -43,6 +61,7 @@
     "typescript": "^5.5.3",
     "jest": "^29.7.0",
     "@types/jest": "^29.5.12",
-    "ts-jest": "^29.2.2"
+    "ts-jest": "^29.2.2",
+    "prettier": "^3.8.3"
   }
 }

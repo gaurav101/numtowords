@@ -1,6 +1,8 @@
 # @gks101/numtowords
 
-> Convert numbers to words in **multiple languages and numeral systems** — English, Indian, Hindi, German, French — with full TypeScript support.
+[![bundle size](https://badgen.net/bundlephobia/minzip/react)](https://bundlephobia.com/package/@gks101/numtowords) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![tree shaking](https://badgen.net/bundlephobia/tree-shaking/react-colorful)](https://bundlephobia.com/package/@gks101/numtowords) [![dependency count](https://badgen.net/bundlephobia/dependency-count/react-colorful)](https://bundlephobia.com/package/@gks101/numtowords)
+
+Convert numbers to words in **multiple languages and numeral systems** — English, Indian, Hindi, German, French — with full TypeScript support.
 
 ```
 convert(1_000_124)                       // "One million one hundred and twenty-four"
@@ -35,42 +37,42 @@ npm install @gks101@numtowords
 ## Quick Start
 
 ```ts
-import { convert } from "@gks101@numtowords";
+import { convert } from '@gks101@numtowords';
 
-convert(0);           // "Zero"
-convert(42);          // "Forty-two"
-convert(1_000_000);   // "One million"
+convert(0); // "Zero"
+convert(42); // "Forty-two"
+convert(1_000_000); // "One million"
 ```
 
 ### Indian numbering system
 
 ```ts
-convert(1_00_000,  { locale: "in" });  // "One lakh"
-convert(10_00_000, { locale: "in" });  // "Ten lakh"
-convert(1_00_00_000, { locale: "in" }); // "One crore"
+convert(1_00_000, { locale: 'in' }); // "One lakh"
+convert(10_00_000, { locale: 'in' }); // "Ten lakh"
+convert(1_00_00_000, { locale: 'in' }); // "One crore"
 ```
 
 ### Hindi (Devanagari)
 
 ```ts
-convert(1_00_000,    { locale: "hi" });  // "एक लाख"
-convert(1_00_00_000, { locale: "hi" }); // "एक करोड़"
+convert(1_00_000, { locale: 'hi' }); // "एक लाख"
+convert(1_00_00_000, { locale: 'hi' }); // "एक करोड़"
 ```
 
 ### German
 
 ```ts
-convert(21,          { locale: "de" });  // "Einundzwanzig"
-convert(1_000_000,   { locale: "de" });  // "Eine Million"
-convert(2_000_000,   { locale: "de" });  // "Zwei Millionen"
+convert(21, { locale: 'de' }); // "Einundzwanzig"
+convert(1_000_000, { locale: 'de' }); // "Eine Million"
+convert(2_000_000, { locale: 'de' }); // "Zwei Millionen"
 ```
 
 ### French
 
 ```ts
-convert(70,        { locale: "fr" }); // "Soixante-dix"
-convert(80,        { locale: "fr" }); // "Quatre-vingts"
-convert(1_000_000, { locale: "fr" }); // "Un million"
+convert(70, { locale: 'fr' }); // "Soixante-dix"
+convert(80, { locale: 'fr' }); // "Quatre-vingts"
+convert(1_000_000, { locale: 'fr' }); // "Un million"
 ```
 
 ---
@@ -79,26 +81,30 @@ convert(1_000_000, { locale: "fr" }); // "Un million"
 
 ### `convert(input, options?)`
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `input` | `number \| bigint \| string` | The number to convert. Negative numbers, string input with commas/underscores, and BigInts are all supported. |
-| `options` | `ConvertOptions` | Optional configuration (see below). |
+| Parameter | Type                         | Description                                                                                                   |
+| --------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `input`   | `number \| bigint \| string` | The number to convert. Negative numbers, string input with commas/underscores, and BigInts are all supported. |
+| `options` | `ConvertOptions`             | Optional configuration (see below).                                                                           |
 
 **Returns** `string`
 
 ### `ConvertOptions`
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `locale` | `"en" \| "in" \| "hi" \| "de" \| "fr"` | `"en"` | Target language / numeral system |
-| `capitalize` | `boolean` | `true` | Capitalise the first letter |
-| `useAnd` | `boolean` | `true` | Include "and" connector (English only) |
-| `currency` | `string` | `""` | Currency label appended to result, e.g. `"USD"` |
+| Option       | Type                                   | Default | Description                                     |
+| ------------ | -------------------------------------- | ------- | ----------------------------------------------- |
+| `locale`     | `"en" \| "in" \| "hi" \| "de" \| "fr"` | `"en"`  | Target language / numeral system                |
+| `capitalize` | `boolean`                              | `true`  | Capitalise the first letter                     |
+| `useAnd`     | `boolean`                              | `true`  | Include "and" connector (English only)          |
+| `currency`   | `string`                               | `""`    | Currency label appended to result, e.g. `"USD"` |
 
 ### Other exports
 
 ```ts
-import { availableLocales, registerLocale, getLocale } from "@gks101@numtowords";
+import {
+  availableLocales,
+  registerLocale,
+  getLocale,
+} from '@gks101@numtowords';
 
 availableLocales(); // ["en", "in", "hi", "de", "fr"]
 ```
@@ -110,8 +116,8 @@ availableLocales(); // ["en", "in", "hi", "de", "fr"]
 ### BigInt (very large numbers)
 
 ```ts
-convert(9_007_199_254_740_993n);             // beyond Number.MAX_SAFE_INTEGER
-convert(1_00_00_00_00_000n, { locale: "in" }); // "One arab"
+convert(9_007_199_254_740_993n); // beyond Number.MAX_SAFE_INTEGER
+convert(1_00_00_00_00_000n, { locale: 'in' }); // "One arab"
 ```
 
 ### Disable capitalisation
@@ -129,8 +135,8 @@ convert(101, { useAnd: false }); // "One hundred one"
 ### Currency
 
 ```ts
-convert(5,      { currency: "USD" });              // "Five USD"
-convert(100000, { locale: "in", currency: "INR" }); // "One lakh INR"
+convert(5, { currency: 'USD' }); // "Five USD"
+convert(100000, { locale: 'in', currency: 'INR' }); // "One lakh INR"
 ```
 
 ### Negative numbers
@@ -148,46 +154,46 @@ You can add locales at runtime by calling `registerLocale()` with a LocaleDefini
 Minimal stub:
 
 ```ts
-import { registerLocale, convert } from "@gks101@numtowords";
+import { registerLocale, convert } from '@gks101@numtowords';
 
-registerLocale("es", {
-  name: "Spanish",
+registerLocale('es', {
+  name: 'Spanish',
   convert(n, _opts) {
     // minimal implementation — handle zero and fall back to a placeholder
-    if (n === 0n) return "cero";
-    return "número";
+    if (n === 0n) return 'cero';
+    return 'número';
   },
 });
 
-convert(5, { locale: "es" }); // "Número" (capitalisation applied by library)
+convert(5, { locale: 'es' }); // "Número" (capitalisation applied by library)
 ```
 
 Practical Spanish examples
 
 ```ts
 // Basic numbers
-convert(0,   { locale: "es" });     // "Cero"
-convert(1,   { locale: "es" });     // "Uno"
-convert(2,   { locale: "es" });     // "Dos"
-convert(10,  { locale: "es" });     // "Diez"
-convert(16,  { locale: "es" });     // "Dieciséis"
-convert(21,  { locale: "es" });     // "Veintiuno"
-convert(22,  { locale: "es" });     // "Veintidós"
+convert(0, { locale: 'es' }); // "Cero"
+convert(1, { locale: 'es' }); // "Uno"
+convert(2, { locale: 'es' }); // "Dos"
+convert(10, { locale: 'es' }); // "Diez"
+convert(16, { locale: 'es' }); // "Dieciséis"
+convert(21, { locale: 'es' }); // "Veintiuno"
+convert(22, { locale: 'es' }); // "Veintidós"
 
 // Hundreds and thousands
-convert(100,   { locale: "es" });   // "Cien"
-convert(101,   { locale: "es" });   // "Ciento uno"
-convert(199,   { locale: "es" });   // "Ciento noventa y nueve"
-convert(1000,  { locale: "es" });   // "Mil"
-convert(1_001, { locale: "es" });   // "Mil uno"
+convert(100, { locale: 'es' }); // "Cien"
+convert(101, { locale: 'es' }); // "Ciento uno"
+convert(199, { locale: 'es' }); // "Ciento noventa y nueve"
+convert(1000, { locale: 'es' }); // "Mil"
+convert(1_001, { locale: 'es' }); // "Mil uno"
 
 // Millions, accents and plurals
-convert(1_000_000, { locale: "es" }); // "Un millón"
-convert(2_000_000, { locale: "es" }); // "Dos millones"
+convert(1_000_000, { locale: 'es' }); // "Un millón"
+convert(2_000_000, { locale: 'es' }); // "Dos millones"
 
 // Negative and currency examples
-convert(-5, { locale: "es" });             // "Negativo cinco"
-convert(1,  { locale: "es", currency: "EUR" }); // "Uno EUR"
+convert(-5, { locale: 'es' }); // "Negativo cinco"
+convert(1, { locale: 'es', currency: 'EUR' }); // "Uno EUR"
 ```
 
 Notes
@@ -200,11 +206,11 @@ Notes
 
 ## Bundle Formats
 
-| File | Format | Use case |
-|------|--------|----------|
+| File                | Format    | Use case                         |
+| ------------------- | --------- | -------------------------------- |
 | `dist/index.esm.js` | ES Module | Bundlers (Vite, webpack, Rollup) |
-| `dist/index.cjs.js` | CommonJS | Node.js (`require`) |
-| `dist/index.umd.js` | UMD | Browser `<script>` tags |
+| `dist/index.cjs.js` | CommonJS  | Node.js (`require`)              |
+| `dist/index.umd.js` | UMD       | Browser `<script>` tags          |
 
 ### Browser via CDN
 
@@ -230,16 +236,16 @@ npm run lint    # TypeScript type check
 
 ## Indian Numeral Scale Reference
 
-| Value | Indian Name | English equivalent |
-|-------|------------|-------------------|
-| 1,000 | Thousand | Thousand |
-| 1,00,000 | Lakh | Hundred Thousand |
-| 1,00,00,000 | Crore | Ten Million |
-| 1,00,00,00,000 | Arab | Billion |
-| 1,00,00,00,00,000 | Kharab | Hundred Billion |
-| 1,00,00,00,00,00,000 | Neel | Ten Trillion |
-| 1,00,00,00,00,00,00,000 | Padma | Quadrillion |
-| 1,00,00,00,00,00,00,00,000 | Shankh | Hundred Quadrillion |
+| Value                      | Indian Name | English equivalent  |
+| -------------------------- | ----------- | ------------------- |
+| 1,000                      | Thousand    | Thousand            |
+| 1,00,000                   | Lakh        | Hundred Thousand    |
+| 1,00,00,000                | Crore       | Ten Million         |
+| 1,00,00,00,000             | Arab        | Billion             |
+| 1,00,00,00,00,000          | Kharab      | Hundred Billion     |
+| 1,00,00,00,00,00,000       | Neel        | Ten Trillion        |
+| 1,00,00,00,00,00,00,000    | Padma       | Quadrillion         |
+| 1,00,00,00,00,00,00,00,000 | Shankh      | Hundred Quadrillion |
 
 ---
 

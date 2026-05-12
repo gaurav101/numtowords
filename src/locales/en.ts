@@ -1,18 +1,42 @@
-import { registerLocale } from "../core/converter";
-import { LocaleDefinition, ConvertOptions } from "../core/types";
+import { registerLocale } from '../core/converter';
+import { LocaleDefinition, ConvertOptions } from '../core/types';
 
 // ─── Word tables ──────────────────────────────────────────────────────────────
 
 const ONES = [
-  "", "one", "two", "three", "four", "five",
-  "six", "seven", "eight", "nine", "ten",
-  "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-  "sixteen", "seventeen", "eighteen", "nineteen",
+  '',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen',
 ];
 
 const TENS = [
-  "", "", "twenty", "thirty", "forty", "fifty",
-  "sixty", "seventy", "eighty", "ninety",
+  '',
+  '',
+  'twenty',
+  'thirty',
+  'forty',
+  'fifty',
+  'sixty',
+  'seventy',
+  'eighty',
+  'ninety',
 ];
 
 /**
@@ -20,24 +44,24 @@ const TENS = [
  * Index 0 = thousands, 1 = millions, …
  */
 const SCALES = [
-  "thousand",
-  "million",
-  "billion",
-  "trillion",
-  "quadrillion",
-  "quintillion",
-  "sextillion",
-  "septillion",
-  "octillion",
-  "nonillion",
-  "decillion",
+  'thousand',
+  'million',
+  'billion',
+  'trillion',
+  'quadrillion',
+  'quintillion',
+  'sextillion',
+  'septillion',
+  'octillion',
+  'nonillion',
+  'decillion',
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /** Convert 0–999 to words */
 function hundredsToWords(n: number, useAnd: boolean): string {
-  if (n === 0) return "";
+  if (n === 0) return '';
 
   const parts: string[] = [];
   const h = Math.floor(n / 100);
@@ -50,7 +74,7 @@ function hundredsToWords(n: number, useAnd: boolean): string {
   if (remainder === 0) {
     // nothing more
   } else {
-    if (h > 0 && useAnd) parts.push("and");
+    if (h > 0 && useAnd) parts.push('and');
     if (remainder < 20) {
       parts.push(ONES[remainder]);
     } else {
@@ -60,16 +84,16 @@ function hundredsToWords(n: number, useAnd: boolean): string {
     }
   }
 
-  return parts.join(" ");
+  return parts.join(' ');
 }
 
 // ─── Locale definition ────────────────────────────────────────────────────────
 
 const en: LocaleDefinition = {
-  name: "English",
+  name: 'English',
 
   convert(n: bigint, opts: Required<ConvertOptions>): string {
-    if (n === 0n) return "zero";
+    if (n === 0n) return 'zero';
 
     const useAnd = opts.useAnd;
     const chunks: { value: number; scale: number }[] = [];
@@ -102,10 +126,10 @@ const en: LocaleDefinition = {
       }
     }
 
-    return parts.join(" ");
+    return parts.join(' ');
   },
 };
 
-registerLocale("en", en);
+registerLocale('en', en);
 
 export default en;

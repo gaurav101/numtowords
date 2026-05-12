@@ -1,7 +1,4 @@
 # Source files
-src/
-tests/
-examples/
 
 # Build and config files
 rollup.config.js
@@ -25,12 +22,6 @@ vite.config.js
 node_modules/
 package-lock.json
 
-# Documentation
-docs/
-WhyLumina.md
-walkthrough.md
-task.md
-implementation_plan.md
 
 # Archives
 *.tgz

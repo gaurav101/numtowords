@@ -1,18 +1,42 @@
-import { registerLocale } from "../core/converter";
-import { LocaleDefinition, ConvertOptions } from "../core/types";
+import { registerLocale } from '../core/converter';
+import { LocaleDefinition, ConvertOptions } from '../core/types';
 
 // ─── Word tables ──────────────────────────────────────────────────────────────
 
 const ONES = [
-  "", "one", "two", "three", "four", "five",
-  "six", "seven", "eight", "nine", "ten",
-  "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-  "sixteen", "seventeen", "eighteen", "nineteen",
+  '',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fifteen',
+  'sixteen',
+  'seventeen',
+  'eighteen',
+  'nineteen',
 ];
 
 const TENS = [
-  "", "", "twenty", "thirty", "forty", "fifty",
-  "sixty", "seventy", "eighty", "ninety",
+  '',
+  '',
+  'twenty',
+  'thirty',
+  'forty',
+  'fifty',
+  'sixty',
+  'seventy',
+  'eighty',
+  'ninety',
 ];
 
 /**
@@ -24,20 +48,20 @@ const TENS = [
  *   …
  */
 const INDIAN_SCALES: [bigint, string][] = [
-  [100000000000000000n, "shankh"],  // 10^17
-  [1000000000000000n,   "padma"],   // 10^15
-  [10000000000000n,     "neel"],    // 10^13
-  [100000000000n,       "kharab"],  // 10^11
-  [1000000000n,         "arab"],    // 10^9
-  [10000000n,           "crore"],   // 10^7
-  [100000n,             "lakh"],    // 10^5
-  [1000n,               "thousand"],
+  [100000000000000000n, 'shankh'], // 10^17
+  [1000000000000000n, 'padma'], // 10^15
+  [10000000000000n, 'neel'], // 10^13
+  [100000000000n, 'kharab'], // 10^11
+  [1000000000n, 'arab'], // 10^9
+  [10000000n, 'crore'], // 10^7
+  [100000n, 'lakh'], // 10^5
+  [1000n, 'thousand'],
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function twoDigits(n: number): string {
-  if (n === 0) return "";
+  if (n === 0) return '';
   if (n < 20) return ONES[n];
   const t = Math.floor(n / 10);
   const o = n % 10;
@@ -45,23 +69,23 @@ function twoDigits(n: number): string {
 }
 
 function hundredsToWords(n: number): string {
-  if (n === 0) return "";
+  if (n === 0) return '';
   const h = Math.floor(n / 100);
   const rem = n % 100;
   const parts: string[] = [];
   if (h > 0) parts.push(`${ONES[h]} hundred`);
   const two = twoDigits(rem);
   if (two) parts.push(two);
-  return parts.join(" ");
+  return parts.join(' ');
 }
 
 // ─── Locale definition ────────────────────────────────────────────────────────
 
 const indian: LocaleDefinition = {
-  name: "Indian",
+  name: 'Indian',
 
   convert(n: bigint, _opts: Required<ConvertOptions>): string {
-    if (n === 0n) return "zero";
+    if (n === 0n) return 'zero';
 
     const parts: string[] = [];
     let remaining = n;
@@ -83,10 +107,10 @@ const indian: LocaleDefinition = {
       parts.push(hundredsToWords(Number(remaining)));
     }
 
-    return parts.join(" ");
+    return parts.join(' ');
   },
 };
 
-registerLocale("in", indian);
+registerLocale('in', indian);
 
 export default indian;
