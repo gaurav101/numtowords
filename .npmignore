@@ -1,0 +1,36 @@
+# Source files
+src/
+tests/
+examples/
+
+# Build and config files
+rollup.config.js
+eslint.config.js
+jsdoc.json
+tsconfig.json
+tsconfig.*.json
+vite.config.ts
+vite.config.js
+.prettierignore
+.prettierrc
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/
+.github/
+.gitignore
+
+# Development files
+node_modules/
+package-lock.json
+
+# Documentation
+docs/
+WhyLumina.md
+walkthrough.md
+task.md
+implementation_plan.md
+
+# Archives
+*.tgz
