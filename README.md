@@ -174,18 +174,9 @@ Practical Spanish examples
 // Basic numbers
 convert(0, { locale: 'es' }); // "Cero"
 convert(1, { locale: 'es' }); // "Uno"
-convert(2, { locale: 'es' }); // "Dos"
-convert(10, { locale: 'es' }); // "Diez"
-convert(16, { locale: 'es' }); // "Dieciséis"
-convert(21, { locale: 'es' }); // "Veintiuno"
-convert(22, { locale: 'es' }); // "Veintidós"
-
 // Hundreds and thousands
 convert(100, { locale: 'es' }); // "Cien"
 convert(101, { locale: 'es' }); // "Ciento uno"
-convert(199, { locale: 'es' }); // "Ciento noventa y nueve"
-convert(1000, { locale: 'es' }); // "Mil"
-convert(1_001, { locale: 'es' }); // "Mil uno"
 
 // Millions, accents and plurals
 convert(1_000_000, { locale: 'es' }); // "Un millón"
