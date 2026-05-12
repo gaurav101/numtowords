@@ -2,7 +2,7 @@
 
 [![bundle size](https://badgen.net/bundlephobia/minzip/react)](https://bundlephobia.com/package/@gks101/numtowords) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![tree shaking](https://badgen.net/bundlephobia/tree-shaking/react-colorful)](https://bundlephobia.com/package/@gks101/numtowords) [![dependency count](https://badgen.net/bundlephobia/dependency-count/react-colorful)](https://bundlephobia.com/package/@gks101/numtowords)
 
-Convert numbers to words in **multiple languages and numeral systems** — English, Indian, Hindi, German, French — with full TypeScript support.
+Convert numbers to words in **multiple languages and numeral systems** — English, Indian, Hindi, German, French — with full TypeScript support,zero dependencies and < 3kb size.
 
 ```
 convert(1_000_124)                       // "One million one hundred and twenty-four"
