@@ -21,8 +21,13 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-
+          
+      - name: Update npm
+      
+        run: npm install -g npm@latest
+        
       - name: Install Dependencies
+        
         run: npm ci
 
       # 2. Publish without a secret, using the OIDC token automatically
