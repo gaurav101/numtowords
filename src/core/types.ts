@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Supported locale identifiers */
-export type Locale = 'en' | 'in' | 'hi' | 'de' | 'fr' |'in-be'| (string & {});
+export type Locale = 'en' | 'in' | 'hi' | 'de' | 'fr' |'in-bn'| (string & {});
 
 /** Options passed to convert() */
 export interface ConvertOptions {
@@ -11,7 +11,7 @@ export interface ConvertOptions {
    * Target locale / numeral system.
    * - `"en"` — English (International):  1,000,000 = One Million
    * - `"in"` — Indian numbering system:  10,00,000 = Ten Lakh
-   * - `"in-be"` — indian Bengali: 1,000 = হাজার
+   * - `"in-bn"` — indian Bengali: 1,000 = হাজার
    * - `"hi"` — Hindi words (Indian system): दस लाख
    * - `"de"` — German
    * - `"fr"` — French

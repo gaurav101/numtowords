@@ -139,7 +139,7 @@ function hundredsBengali(n: number): string {
 
 // ─── Locale definition ────────────────────────────────────────────────────────
 
-const in_be: LocaleDefinition = {
+const in_bn: LocaleDefinition = {
     name: 'Bengali',
 
     convert(n: bigint, _opts: Required<ConvertOptions>): string {
@@ -165,7 +165,7 @@ const in_be: LocaleDefinition = {
     },
 };
 
-registerLocale('in-be', in_be);
+registerLocale('in-be', in_bn);
 
-export default in_be;
+export default in_bn;
 
