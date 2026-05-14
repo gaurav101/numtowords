@@ -4,6 +4,7 @@ import './locales/in';
 import './locales/hi';
 import './locales/de';
 import './locales/fr';
+import './locales/in-be';
 
 // ─── Re-export public API ─────────────────────────────────────────────────────
 export {
