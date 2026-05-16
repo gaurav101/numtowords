@@ -29,7 +29,7 @@ convert(1_000_124, { locale: "fr" })    // "Un million cent vingt-quatre"
 ## Installation
 
 ```bash
-npm install @gks101@numtowords
+npm install @gks101/numtowords
 ```
 
 ---
@@ -37,7 +37,7 @@ npm install @gks101@numtowords
 ## Quick Start
 
 ```ts
-import { convert } from '@gks101@numtowords';
+import { convert } from '@gks101/numtowords';
 
 convert(0); // "Zero"
 convert(42); // "Forty-two"
