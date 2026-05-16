@@ -142,6 +142,19 @@ function hundredsHindi(n: number): string {
 
 const hi: LocaleDefinition = {
   name: 'Hindi',
+  decimalPoint: 'दशमलव',
+  decimalDigits: [
+    'शून्य',
+    'एक',
+    'दो',
+    'तीन',
+    'चार',
+    'पाँच',
+    'छह',
+    'सात',
+    'आठ',
+    'नौ',
+  ],
 
   convert(n: bigint, _opts: Required<ConvertOptions>): string {
     if (n === 0n) return 'शून्य';

@@ -83,6 +83,8 @@ function hundredsToWords(n: number): string {
 
 const indian: LocaleDefinition = {
   name: 'Indian',
+  decimalPoint: 'point',
+  decimalDigits: ['zero', ...ONES.slice(1, 10)],
 
   convert(n: bigint, _opts: Required<ConvertOptions>): string {
     if (n === 0n) return 'zero';

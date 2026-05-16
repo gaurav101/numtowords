@@ -42,7 +42,7 @@ const DEFAULT_OPTIONS: Required<ConvertOptions> = {
 // ─── Main convert function ────────────────────────────────────────────────────
 
 /**
- * Convert a number (integer or string) to its word representation.
+ * Convert a number (integer, decimal, or string) to its word representation.
  *
  * @example
  * convert(1000124)              // "One Million One Hundred Twenty Four"
@@ -67,18 +67,34 @@ export function convert(
   // Strip commas / underscores used as separators
   raw = raw.replace(/[,_\s]/g, '');
 
-  if (!/^\d+$/.test(raw)) {
+  if (!/^\d+(?:\.\d+)?$/.test(raw)) {
     throw new Error(`[numtowords] Invalid numeric input: "${input}"`);
   }
 
+  const [integerRaw, fractionRaw = ''] = raw.split('.');
+
   // Remove leading zeros
-  raw = raw.replace(/^0+/, '') || '0';
+  raw = integerRaw.replace(/^0+/, '') || '0';
 
   const n = BigInt(raw);
 
   // ── Delegate to locale ─────────────────────────────────────────────────────
   const locale = getLocale(opts.locale);
   let result = locale.convert(n, opts);
+
+  if (fractionRaw) {
+    const fractionWords = fractionRaw
+      .split('')
+      .map((digit) => {
+        const value = Number(digit);
+        return (
+          locale.decimalDigits?.[value] ?? locale.convert(BigInt(value), opts)
+        );
+      })
+      .join(' ');
+
+    result = `${result} ${locale.decimalPoint} ${fractionWords}`;
+  }
 
   if (negative) result = 'Negative ' + result;
 

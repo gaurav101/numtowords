@@ -37,4 +37,8 @@ export interface LocaleDefinition {
   name: string;
   /** Convert an integer ≥ 0 to words */
   convert(n: bigint, opts: Required<ConvertOptions>): string;
+  /** Word used between integer and fractional parts */
+  decimalPoint: string;
+  /** Locale-specific digit words for fractional parts, indexed 0–9 */
+  decimalDigits?: string[];
 }

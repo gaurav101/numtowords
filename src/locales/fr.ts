@@ -38,7 +38,23 @@ const TENS_FR = [
   'quatre-vingt',
   'quatre-vingt',
 ];
+const SCALES_FR = [
+  'mille',
+  'million',
+  'milliard',
+  'billion',
+  'billiard',
+  'trillion',
+];
 
+const SCALES_FR_PLURAL = [
+  'mille',
+  'millions',
+  'milliards',
+  'billions',
+  'billiards',
+  'trillions',
+];
 /**
  * French has irregular 70s (soixante-dix + 10–19) and 90s (quatre-vingt-dix + 10–19).
  */
@@ -91,28 +107,12 @@ function hundredsFR(n: number): string {
   return parts.join(' ');
 }
 
-const SCALES_FR = [
-  'mille',
-  'million',
-  'milliard',
-  'billion',
-  'billiard',
-  'trillion',
-];
-
-const SCALES_FR_PLURAL = [
-  'mille',
-  'millions',
-  'milliards',
-  'billions',
-  'billiards',
-  'trillions',
-];
-
 // ─── Locale definition ────────────────────────────────────────────────────────
 
 const fr: LocaleDefinition = {
   name: 'French',
+  decimalPoint: 'virgule',
+  decimalDigits: ['zéro', ...ONES_FR.slice(1, 10)],
 
   convert(n: bigint, _opts: Required<ConvertOptions>): string {
     if (n === 0n) return 'zéro';

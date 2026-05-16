@@ -38,6 +38,37 @@ const TENS_DE = [
   'achtzig',
   'neunzig',
 ];
+const SCALES_DE = [
+  'tausend',
+  'Million',
+  'Milliarde',
+  'Billion',
+  'Billiarde',
+  'Trillion',
+];
+/** Scales that are grammatically feminine in German (require "eine" not "ein") */
+const FEMININE_SCALES = new Set([1, 2, 4, 6]); // indices: Million, Milliarde, Billiarde, Trillion
+const DECIMAL_DE=[
+      'null',
+      'eins',
+      'zwei',
+      'drei',
+      'vier',
+      'fünf',
+      'sechs',
+      'sieben',
+      'acht',
+      'neun',
+    ]
+const SCALES_DE_PLURAL = [
+  'tausend',
+  'Millionen',
+  'Milliarden',
+  'Billionen',
+  'Billiarden',
+  'Trillionen',
+];
+const DECIMAL_DE_NAME='komma';
 
 /** German uses "und" between ones and tens: einundzwanzig */
 function upToNinetyNine(n: number): string {
@@ -60,31 +91,12 @@ function hundredsDE(n: number): string {
   return parts.join('');
 }
 
-const SCALES_DE = [
-  'tausend',
-  'Million',
-  'Milliarde',
-  'Billion',
-  'Billiarde',
-  'Trillion',
-];
-
-/** Scales that are grammatically feminine in German (require "eine" not "ein") */
-const FEMININE_SCALES = new Set([1, 2, 4, 6]); // indices: Million, Milliarde, Billiarde, Trillion
-
-const SCALES_DE_PLURAL = [
-  'tausend',
-  'Millionen',
-  'Milliarden',
-  'Billionen',
-  'Billiarden',
-  'Trillionen',
-];
-
 // ─── Locale definition ────────────────────────────────────────────────────────
 
 const de: LocaleDefinition = {
   name: 'German',
+  decimalPoint: DECIMAL_DE_NAME,
+  decimalDigits:DECIMAL_DE,
 
   convert(n: bigint, _opts: Required<ConvertOptions>): string {
     if (n === 0n) return 'null';

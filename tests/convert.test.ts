@@ -19,6 +19,12 @@ describe('English (en)', () => {
     expect(convert(1_000_000_000)).toBe('One billion'));
   it('handles negative', () => expect(convert(-42)).toBe('Negative forty-two'));
   it('accepts string input', () => expect(convert('500')).toBe('Five hundred'));
+  it('accepts decimal number input', () =>
+    expect(convert(12.34)).toBe('Twelve point three four'));
+  it('preserves decimal string trailing zeros', () =>
+    expect(convert('150.50')).toBe('One hundred and fifty point five zero'));
+  it('handles negative decimals', () =>
+    expect(convert('-0.25')).toBe('Negative zero point two five'));
   it('accepts bigint input', () =>
     expect(convert(9007199254740993n)).toContain('quadrillion'));
   it("disables 'and'", () =>
@@ -44,6 +50,8 @@ describe('Indian system (in)', () => {
     expect(convert(1_000_000_324n, { locale: 'in' })).toBe(
       'One arab three hundred twenty-four',
     ));
+  it('accepts decimals', () =>
+    expect(convert('12.34', { locale: 'in' })).toBe('Twelve point three four'));
 });
 
 // ─── Hindi ────────────────────────────────────────────────────────────────────
@@ -57,6 +65,8 @@ describe('Hindi (hi)', () => {
     expect(convert(1_000_124, { locale: 'hi' })).toBe('दस लाख एक सौ चौबीस'));
   it('converts 1,000,324', () =>
     expect(convert(1_000_324, { locale: 'hi' })).toBe('दस लाख तीन सौ चौबीस'));
+  it('accepts decimals', () =>
+    expect(convert('12.34', { locale: 'hi' })).toBe('बारह दशमलव तीन चार'));
 });
 
 // ─── German ───────────────────────────────────────────────────────────────────
@@ -70,6 +80,8 @@ describe('German (de)', () => {
     expect(convert(1_000_000, { locale: 'de' })).toBe('Eine Million'));
   it('converts two million', () =>
     expect(convert(2_000_000, { locale: 'de' })).toBe('Zwei Millionen'));
+  it('accepts decimals', () =>
+    expect(convert('12.34', { locale: 'de' })).toBe('Zwölf komma drei vier'));
 });
 
 // ─── French ───────────────────────────────────────────────────────────────────
@@ -85,6 +97,10 @@ describe('French (fr)', () => {
     expect(convert(1000, { locale: 'fr' })).toBe('Mille'));
   it('converts two million', () =>
     expect(convert(2_000_000, { locale: 'fr' })).toBe('Deux millions'));
+  it('accepts decimals', () =>
+    expect(convert('12.34', { locale: 'fr' })).toBe(
+      'Douze virgule trois quatre',
+    ));
 });
 
 // ─── Currency ─────────────────────────────────────────────────────────────────
@@ -113,6 +129,8 @@ describe('availableLocales()', () => {
 describe('Error handling', () => {
   it('throws on invalid input', () =>
     expect(() => convert('abc' as never)).toThrow());
+  it('throws on incomplete decimal input', () =>
+    expect(() => convert('12.' as never)).toThrow());
   it('throws on unknown locale', () =>
     expect(() => convert(1, { locale: 'xx' as never })).toThrow());
 });

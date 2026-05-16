@@ -91,6 +91,8 @@ function hundredsToWords(n: number, useAnd: boolean): string {
 
 const en: LocaleDefinition = {
   name: 'English',
+  decimalPoint: 'point',
+  decimalDigits: ['zero', ...ONES.slice(1, 10)],
 
   convert(n: bigint, opts: Required<ConvertOptions>): string {
     if (n === 0n) return 'zero';
