@@ -6,8 +6,11 @@ Convert numbers to words in **multiple languages and numeral systems** — Engli
 
 ```
 convert(1_000_124)                       // "One million one hundred and twenty-four"
+convert(12.34)                           // "Twelve point three four"
+convert("150.50")                        // "One hundred and fifty point five zero"
 convert(1_000_124, { locale: "in" })    // "Ten lakh one hundred twenty-four"
 convert(1_000_124, { locale: "hi" })    // "दस लाख एक सौ चौबीस"
+convert("12.34", { locale: "hi" })      // "बारह दशमलव तीन चार"
 convert(1_000_124, { locale: "de" })    // "Eine Million einhundertvierundzwanzig"
 convert(1_000_124, { locale: "fr" })    // "Un million cent vingt-quatre"
 ```
@@ -18,6 +21,7 @@ convert(1_000_124, { locale: "fr" })    // "Un million cent vingt-quatre"
 
 - 🌍 **5 locales out of the box** — `en`, `in`, `hi`, `de`, `fr`
 - 🇮🇳 **Indian numbering system** — lakh, crore, arab, kharab, neel, padma, shankh
+- 🔢 **Decimal point support** — converts decimal numbers and decimal strings digit by digit
 - 🔢 **BigInt support** — handles arbitrarily large numbers
 - 💱 **Currency mode** — appends a currency label
 - 🔌 **Extensible** — register your own locale in two lines
@@ -42,6 +46,29 @@ import { convert } from '@gks101/numtowords';
 convert(0); // "Zero"
 convert(42); // "Forty-two"
 convert(1_000_000); // "One million"
+convert(12.34); // "Twelve point three four"
+convert('150.50'); // "One hundred and fifty point five zero"
+```
+
+### Decimal numbers
+
+Decimal values are supported with `.` as the decimal separator. The integer part is converted normally, and the fractional part is converted digit by digit using the selected locale.
+
+```ts
+convert(12.34); // "Twelve point three four"
+convert('150.50'); // "One hundred and fifty point five zero"
+convert('-0.25'); // "Negative zero point two five"
+convert('12.34', { locale: 'in' }); // "Twelve point three four"
+convert('12.34', { locale: 'hi' }); // "बारह दशमलव तीन चार"
+convert('12.34', { locale: 'de' }); // "Zwölf komma drei vier"
+convert('12.34', { locale: 'fr' }); // "Douze virgule trois quatre"
+```
+
+Use a string when trailing zeros are meaningful:
+
+```ts
+convert(150.5); // "One hundred and fifty point five"
+convert('150.50'); // "One hundred and fifty point five zero"
 ```
 
 ### Indian numbering system
@@ -81,10 +108,10 @@ convert(1_000_000, { locale: 'fr' }); // "Un million"
 
 ### `convert(input, options?)`
 
-| Parameter | Type                         | Description                                                                                                   |
-| --------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `input`   | `number \| bigint \| string` | The number to convert. Negative numbers, string input with commas/underscores, and BigInts are all supported. |
-| `options` | `ConvertOptions`             | Optional configuration (see below).                                                                           |
+| Parameter | Type                         | Description                                                                                                                      |
+| --------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `input`   | `number \| bigint \| string` | The number to convert. Negative numbers, decimals with `.`, string input with commas/underscores, and BigInts are all supported. |
+| `options` | `ConvertOptions`             | Optional configuration (see below).                                                                                              |
 
 **Returns** `string`
 
@@ -104,7 +131,7 @@ import {
   availableLocales,
   registerLocale,
   getLocale,
-} from '@gks101@numtowords';
+} from '@gks101/numtowords';
 
 availableLocales(); // ["en", "in", "hi", "de", "fr"]
 ```
@@ -154,10 +181,23 @@ You can add locales at runtime by calling `registerLocale()` with a LocaleDefini
 Minimal stub:
 
 ```ts
-import { registerLocale, convert } from '@gks101@numtowords';
+import { registerLocale, convert } from '@gks101/numtowords';
 
 registerLocale('es', {
   name: 'Spanish',
+  decimalPoint: 'punto',
+  decimalDigits: [
+    'cero',
+    'uno',
+    'dos',
+    'tres',
+    'cuatro',
+    'cinco',
+    'seis',
+    'siete',
+    'ocho',
+    'nueve',
+  ],
   convert(n, _opts) {
     // minimal implementation — handle zero and fall back to a placeholder
     if (n === 0n) return 'cero';
@@ -166,6 +206,7 @@ registerLocale('es', {
 });
 
 convert(5, { locale: 'es' }); // "Número" (capitalisation applied by library)
+convert('5.25', { locale: 'es' }); // "Número punto dos cinco"
 ```
 
 Practical Spanish examples
@@ -190,6 +231,7 @@ convert(1, { locale: 'es', currency: 'EUR' }); // "Uno EUR"
 Notes
 
 - Your locale's `convert` should accept `n: bigint` and return the words in lowercase (prefer returning canonical forms with proper accents); the main library applies capitalization when `capitalize: true`.
+- Set `decimalPoint` and optionally `decimalDigits` to localize decimal output. Without `decimalDigits`, fractional digits fall back to calling your locale's `convert` for each digit.
 - Implementations may use BigInt arithmetic and should avoid throwing for valid numeric inputs.
 - For full correctness in Spanish, handle special forms (e.g., "cien" vs "ciento"), accents (dieciséis, veintidós), and pluralisation ("millón" → "millones").
 
