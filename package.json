@@ -48,7 +48,14 @@
     "amount-to-words",
     "numbers-to-text",
     "currency-formatter",
-    "intl-number-format"
+    "intl-number-format",
+    "numtowords", 
+    "lakh-crore",
+    "indian-numbering-system",
+    "devanagari",
+    "hindi-numbers",
+    "typescript",
+    "bigint-to-words"
   ],
   "author": "",
   "license": "MIT",
